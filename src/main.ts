@@ -6,6 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
+    .addBearerAuth()
     .setTitle('Wellness Event Web Application')
     .setDescription('Wellness Event Web Application APIs for HR and vendor')
     .setVersion('0.0.1')
