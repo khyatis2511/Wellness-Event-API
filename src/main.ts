@@ -7,7 +7,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const prismaService = app.get(PrismaService);
-  await prismaService.enableShutdownHooks(app);
+  // await prismaService.enableShutdownHooks(app);
 
   app.enableCors(); // This allows all origins, you may want to configure it more specifically in production
 
