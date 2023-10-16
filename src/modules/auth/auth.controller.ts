@@ -13,7 +13,7 @@ import { AuthService } from '../auth/auth.service';
 import { LoginDto } from './dto/login.dto';
 import { JwtAuthGuard } from './guards/jwtAuth.guard';
 import { USER_ROLE } from '@prisma/client';
-import { Role } from 'src/shared/decorators/roles.decorator';
+import { Role } from '../../shared/decorators/roles.decorator';
 import { RolesGuard } from './guards/role.guard';
 
 @ApiTags('Auth')

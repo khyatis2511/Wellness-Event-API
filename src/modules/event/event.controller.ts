@@ -17,7 +17,7 @@ import { JwtAuthGuard } from '../auth/guards/jwtAuth.guard';
 import { RolesGuard } from '../auth/guards/role.guard';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
-import { Role } from 'src/shared/decorators/roles.decorator';
+import { Role } from '../../shared/decorators/roles.decorator';
 
 const moduleName = 'Event';
 
