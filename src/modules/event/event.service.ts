@@ -8,23 +8,27 @@ export class EventService {
   constructor(private prisma: PrismaService) {}
 
   async createEvent(createEventDto): Promise<any> {
-    // console.log('Event Dto : ', createEventDto);
     const result = await this.prisma.event.create({
       data: {
         ...createEventDto,
       },
     });
-    return result;
-    // console.log('Create Event : ', result);
+    if (result) {
+      return {
+        status: 'success',
+        data: result,
+      };
+    } else {
+      throw new NotFoundException('Record could not be created');
+    }
   }
 
-  async eventVenderAction({ updateEventDto, eventId }): Promise<any> {
+  async eventVendorAction({ updateEventDto, eventId }): Promise<any> {
     const result = await this.prisma.event.findFirst({
       where: {
         id: eventId,
       },
     });
-    // console.log('result: update : ', result);
     if (result) {
       const data = await this.prisma.event.update({
         where: {
@@ -35,21 +39,21 @@ export class EventService {
           ...updateEventDto,
         },
       });
-      return data;
-      // console.log('if update data: ', data);
+      return {
+        status: 'success',
+        data: data,
+      };
     } else {
       throw new NotFoundException();
     }
-    // console.log('update event dto : ', updateEventDto);
   }
 
   async getEvent(user): Promise<any> {
-    // console.log('user : ', user);
     if (user.role === USER_ROLE.HR) {
       return await this.getHREventList(user.id);
     }
-    if (user.role === USER_ROLE.VENDER) {
-      return await this.getVenderEventList(user.id);
+    if (user.role === USER_ROLE.VENDOR) {
+      return await this.getVendorEventList(user.id);
     }
   }
 
@@ -58,13 +62,21 @@ export class EventService {
       where: {
         createdBy: id,
       },
+      include: {
+        creator: true,
+        vendor: true,
+      },
     });
   }
 
-  private async getVenderEventList(id: string) {
+  private async getVendorEventList(id: string) {
     return await this.prisma.event.findMany({
       where: {
-        venderId: id,
+        vendorId: id,
+      },
+      include: {
+        creator: true,
+        vendor: true,
       },
     });
   }

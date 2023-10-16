@@ -37,15 +37,15 @@ export class EventController {
     return this.eventService.createEvent(createEventDto);
   }
 
-  @Role(USER_ROLE.VENDER)
+  @Role(USER_ROLE.VENDOR)
   @UseGuards(RolesGuard)
   @ApiOperation({ summary: `Update ${moduleName}` })
   @Put(':eventId')
-  eventVenderAction(
+  eventVendorAction(
     @Body() updateEventDto: UpdateEventDto,
     @Param('eventId') eventId: string,
   ) {
-    return this.eventService.eventVenderAction({ updateEventDto, eventId });
+    return this.eventService.eventVendorAction({ updateEventDto, eventId });
   }
 
   @ApiOperation({ summary: `Get ${moduleName} List` })

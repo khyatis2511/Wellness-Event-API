@@ -12,7 +12,7 @@ datasource db {
 
 enum USER_ROLE {
   HR
-  VENDER
+  VENDOR
 }
 
 enum EventStatus {
@@ -36,7 +36,7 @@ model User {
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
   eventCreator Event[]   @relation("CreatedBy")
-  eventVender  Event[]   @relation("VenderId")
+  eventVendor  Event[]   @relation("VendorId")
 }
 
 model Event {
@@ -44,8 +44,8 @@ model Event {
   name             String
   creator          User        @relation("CreatedBy", fields: [createdBy], references: [id])
   createdBy        String      @db.ObjectId
-  vender           User        @relation("VenderId", fields: [venderId], references: [id])
-  venderId         String      @db.ObjectId
+  vendor           User        @relation("VendorId", fields: [vendorId], references: [id])
+  vendorId         String      @db.ObjectId
   proposedDates    String[]
   proposedLocation Location
   status           EventStatus @default(Pending)

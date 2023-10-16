@@ -5,6 +5,8 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.enableCors(); // This allows all origins, you may want to configure it more specifically in production
+
   const config = new DocumentBuilder()
     .addBearerAuth()
     .setTitle('Wellness Event Web Application')

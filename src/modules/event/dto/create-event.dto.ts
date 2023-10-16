@@ -1,6 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Location } from '@prisma/client';
 import { IsNotEmpty } from 'class-validator';
+
+export class ProposedLocation {
+  @IsNotEmpty()
+  @ApiProperty()
+  postalCode: string;
+
+  @IsNotEmpty()
+  @ApiProperty()
+  streetName: string;
+}
 
 export class CreateEventDto {
   @IsNotEmpty()
@@ -13,7 +22,7 @@ export class CreateEventDto {
 
   @IsNotEmpty()
   @ApiProperty()
-  venderId: string;
+  vendorId: string;
 
   @IsNotEmpty()
   @ApiProperty()
@@ -21,5 +30,5 @@ export class CreateEventDto {
 
   @IsNotEmpty()
   @ApiProperty()
-  proposedLocation: Location;
+  proposedLocation: ProposedLocation;
 }

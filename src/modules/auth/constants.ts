@@ -16,19 +16,19 @@ export const userData = [
   {
     email: 'rani@gmail.com',
     name: 'rani',
-    role: USER_ROLE.VENDER,
+    role: USER_ROLE.VENDOR,
     password: 'rani@123',
   },
   {
     email: 'disha@gmail.com',
     name: 'Disha',
-    role: USER_ROLE.VENDER,
+    role: USER_ROLE.VENDOR,
     password: 'disha@123',
   },
   {
     email: 'seema@gmail.com',
     name: 'seema',
-    role: USER_ROLE.VENDER,
+    role: USER_ROLE.VENDOR,
     password: 'seema@123',
   },
   {
