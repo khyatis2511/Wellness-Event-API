@@ -4,8 +4,8 @@
     { 
       "src": "src/main.ts", 
       "use": "@vercel/node", 
-      "config": { "output": "dist" },
-      "build": {"src": "src/main.ts", "use": {"command": "npm run build"} } }
+      "config": { "output": "dist" }
+    }
   ],
   "routes": [
     {
