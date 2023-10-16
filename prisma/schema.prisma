@@ -6,6 +6,51 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
+}
+
+enum USER_ROLE {
+  HR
+  VENDOR
+}
+
+enum EventStatus {
+  Pending
+  Approved
+  Rejected
+}
+
+type Location {
+  postalCode String
+  streetName String
+}
+
+model User {
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  email        String    @unique
+  name         String?
+  role         USER_ROLE
+  password     String
+  companyName  String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  eventCreator Event[]   @relation("CreatedBy")
+  eventVendor  Event[]   @relation("VendorId")
+}
+
+model Event {
+  id               String      @id @default(auto()) @map("_id") @db.ObjectId
+  name             String
+  creator          User        @relation("CreatedBy", fields: [createdBy], references: [id])
+  createdBy        String      @db.ObjectId
+  vendor           User        @relation("VendorId", fields: [vendorId], references: [id])
+  vendorId         String      @db.ObjectId
+  proposedDates    String[]
+  proposedLocation Location
+  status           EventStatus @default(Pending)
+  remarks          String?
+  confirmedDate    String?
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
 }
